@@ -44,6 +44,8 @@ exports.getIndex = (req, res, next) => {
     });
 };
 
+
+
 exports.getCart = (req, res, next) => {
   req.user
     .populate('cart.items.productId')
