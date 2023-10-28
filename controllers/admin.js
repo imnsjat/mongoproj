@@ -18,7 +18,7 @@ exports.postAddProduct = (req, res, next) => {
     price: price,
     description: description,
     imageUrl: imageUrl,
-    userId:req.user
+    userId:req.user._id ,
   });
   product
     .save()
@@ -33,10 +33,10 @@ exports.postAddProduct = (req, res, next) => {
 };
 
 exports.getEditProduct = (req, res, next) => {
-  // const editMode = req.query.edit;
-  // if (!editMode) {
-  //   return res.redirect('/');
-  // }
+  const editMode = req.query.edit;
+  if (!editMode) {
+    return res.redirect('/');
+  }
   const prodId = req.params.productId;
   Product.findById(prodId)
     .then(product => {
@@ -77,8 +77,8 @@ exports.postEditProduct = (req, res, next) => {
 
 exports.getProducts = (req, res, next) => {
   Product.find()
-    .select('title price -_id')
-    .populate('userId','name')
+    // .select('title price _id')
+    // .populate('userId','name')
     
     .then(products => {
       console.log(products)
